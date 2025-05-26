@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>👑KDS CRICKET PREDICTION👑</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://images.unsplash.com/photo-1531415074968-036ba1b575da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        width: 100%;
+        max-width: 520px;
+        padding: 30px;
+        text-align: center;
+        margin-top: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header {
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        color: #ffd700;
+        font-size: 24px;
+        margin-bottom: 5px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .header h2 {
+        color: #ffd700;
+        font-size: 28px;
+        margin-bottom: 20px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .countdown {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 25px 0;
+      }
+
+      .countdown-box {
+        background-color: rgba(255, 69, 0, 0.9);
+        color: white;
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin: 0 10px;
+        min-width: 80px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .countdown-value {
+        font-size: 36px;
+        font-weight: bold;
+      }
+
+      .countdown-label {
+        font-size: 14px;
+        margin-top: 5px;
+      }
+
+      .offer-banner {
+        background-color: rgba(255, 215, 0, 0.9);
+        color: #000;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        font-weight: bold;
+        font-size: 18px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        margin: 25px 0;
+      }
+
+      .stat-box {
+        background-color: rgba(30, 144, 255, 0.9);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        width: 45%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .stat-value {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .stat-label {
+        font-size: 14px;
+        margin-top: 5px;
+      }
+
+      .tagline {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px 0;
+        color: #ffd700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .telegram-btn {
+        background-color: #32cd32;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 20px;
+        transition: all 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .telegram-btn:hover {
+        background-color: #00ff00;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Popup styles */
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.95);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        display: none;
+        text-align: center;
+        max-width: 90%;
+        width: 400px;
+        border: 2px solid #ffd700;
+        animation: pulse 2s infinite;
+      }
+
+      .popup h3 {
+        color: #ffd700;
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+
+      .popup-btn {
+        background-color: #32cd32;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 20px;
+        transition: all 0.3s;
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .popup-btn:hover {
+        background-color: #00ff00;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #ffd700;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(255, 215, 0, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 20px;
+        }
+
+        .header h1 {
+          font-size: 20px;
+        }
+
+        .header h2 {
+          font-size: 24px;
+        }
+
+        .countdown-box {
+          min-width: 70px;
+          padding: 10px 15px;
+          margin: 0 5px;
+        }
+
+        .countdown-value {
+          font-size: 28px;
+        }
+
+        .offer-banner {
+          font-size: 16px;
+        }
+
+        .tagline {
+          font-size: 16px;
+        }
+
+        .popup {
+          width: 90%;
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>BEST CRICKET TIPPER</h1>
+        <h2>👑KDS CRICKET PREDICTION👑</h2>
+      </div>
+
+      <div class="countdown">
+        <div class="countdown-box">
+          <div class="countdown-value" id="minutes">00</div>
+          <div class="countdown-label">Mins</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-value" id="seconds">60</div>
+          <div class="countdown-label">Secs</div>
+        </div>
+      </div>
+
+      <div class="offer-banner">⚡BACK-TO-BACK MATCH PASS DHAMAKA⚡</div>
+
+      <div class="stats">
+        <div class="stat-box">
+          <div class="stat-value">72/74⚡</div>
+          <div class="stat-label">IPL Match Pass</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">30/32⚡</div>
+          <div class="stat-label">TNPL Match Pass</div>
+        </div>
+      </div>
+
+      <div class="tagline">
+        🤝KDS CRICKET PREDICTION MATLAB CRICKET SIRF JITOGE🤝
+      </div>
+
+      <a href="https://telegram.me/+e7nC_DMkLSw1MGJl" class="telegram-btn"
+        >Join Telegram Channel</a
+      >
+    </div>
+
+    <!-- Timer Popup -->
+    <div class="popup" id="timerPopup">
+      <span class="close-btn" onclick="closePopup('timerPopup')">&times;</span>
+      <h3>TIME RUNNING OUT!</h3>
+      <p>Hurry up! Offer ends in:</p>
+      <div style="display: flex; justify-content: center; margin: 20px 0">
+        <div style="margin: 0 10px">
+          <div style="font-size: 36px; font-weight: bold" id="popupMinutes">
+            00
+          </div>
+          <div>Minutes</div>
+        </div>
+        <div style="margin: 0 10px">
+          <div style="font-size: 36px; font-weight: bold" id="popupSeconds">
+            60
+          </div>
+          <div>Seconds</div>
+        </div>
+      </div>
+      <a href="https://telegram.me/+e7nC_DMkLSw1MGJl" class="popup-btn"
+        >Join Now on Telegram</a
+      >
+    </div>
+
+    <!-- Telegram Popup -->
+    <div class="popup" id="telegramPopup">
+      <span class="close-btn" onclick="closePopup('telegramPopup')"
+        >&times;</span
+      >
+      <h3>JOIN OUR TELEGRAM CHANNEL</h3>
+      <p>Get daily cricket predictions and winning tips!</p>
+      <a href="https://telegram.me/+e7nC_DMkLSw1MGJl" class="popup-btn"
+        >Click to Join Telegram</a
+      >
+    </div>
+
+    <script>
+      // Countdown timer
+      let timeLeft = 60;
+
+      function updateCountdown() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        document.getElementById("minutes").textContent = minutes
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("seconds").textContent = seconds
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("popupMinutes").textContent = minutes
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("popupSeconds").textContent = seconds
+          .toString()
+          .padStart(2, "0");
+
+        if (timeLeft === 0) {
+          // Reset timer when it reaches 0
+          timeLeft = 60;
+        } else {
+          timeLeft--;
+        }
+      }
+
+      // Show popups
+      function showPopup(id) {
+        document.getElementById(id).style.display = "block";
+      }
+
+      function closePopup(id) {
+        document.getElementById(id).style.display = "none";
+      }
+
+      // Update every second
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // Show timer popup after 5 seconds
+      setTimeout(() => {
+        showPopup("timerPopup");
+      }, 5000);
+
+      // Show telegram popup after 15 seconds
+      setTimeout(() => {
+        showPopup("telegramPopup");
+      }, 15000);
+
+      // Show popups randomly every 30-60 seconds
+      setInterval(() => {
+        const randomTime = Math.floor(Math.random() * 30000) + 30000; // 30-60 seconds
+        setTimeout(() => {
+          const randomPopup =
+            Math.random() > 0.5 ? "timerPopup" : "telegramPopup";
+          showPopup(randomPopup);
+        }, randomTime);
+      }, 30000);
+    </script>
+  </body>
+</html>
